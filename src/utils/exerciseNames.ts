@@ -6,6 +6,7 @@ import type { Lang } from '../i18n';
  */
 
 const exerciseNameMap: Record<string, string> = {
+  // ── Existing ──
   'Barbell Squat':          '杠铃深蹲',
   'Barbell Bench Press':    '杠铃卧推',
   'Barbell Deadlift':       '杠铃硬拉',
@@ -26,6 +27,58 @@ const exerciseNameMap: Record<string, string> = {
   'Rowing':                 '划船机',
   'Cardio':                 '有氧',
   'Skill / Sport':          '技能 / 运动',
+
+  // ── Chest / 胸部 ──
+  'Chest Press Machine':                    '器械推胸',
+  'Hammer Strength Decline Chest Press':    '悍马机下斜推胸',
+  'Incline Cable Fly':                      '上斜绳索夹胸',
+  'Decline Cable Fly':                      '下斜绳索夹胸',
+  'Assisted Dips':                          '双杠臂屈伸（辅助）',
+  'Hammer Strength Incline Chest Press':    '上斜悍马机推胸',
+
+  // ── Back / 背部 ──
+  'Wide-Grip Pull-Up':                      '宽握引体向上',
+  'Assisted Wide-Grip Pull-Up':             '宽握引体向上（辅助）',
+  'Weighted Wide-Grip Pull-Up':             '宽握引体向上（负重）',
+  'Neutral-Grip Pull-Up':                   '对握引体向上',
+  'Assisted Neutral-Grip Pull-Up':          '对握引体向上（辅助）',
+  'Weighted Neutral-Grip Pull-Up':          '对握引体向上（负重）',
+  'Seated Row Machine':                     '器械划船',
+  'Wide-Grip Lat Pulldown':                 '宽握高位下拉',
+  'Close-Grip Lat Pulldown':                '窄握高位下拉',
+  'V-Bar Lat Pulldown':                     'V-bar 高位下拉',
+  'Bent-Over Barbell Row':                  '俯身杠铃划船',
+
+  // ── Shoulders / 肩部 ──
+  'Lateral Raise':                          '侧平举',
+  'Front Raise':                            '前平举',
+  'Seated Barbell Overhead Press':          '坐姿杠铃推举',
+  'Push Press':                             '实力推',
+  'Reverse Pec Deck Fly':                   '蝴蝶机反向飞鸟',
+  'Upright Barbell Row':                    '站立杠铃划船',
+
+  // ── Biceps / 二头 ──
+  'Standing Alternating Dumbbell Curl':     '站姿哑铃交替弯举',
+  'Seated Alternating Dumbbell Curl':       '坐姿哑铃交替弯举',
+  'EZ-Bar Biceps Curl':                     'EZ 杆二头弯举',
+
+  // ── Triceps / 三头 ──
+  'Cable Triceps Extension':                '绳索臂屈伸',
+  'V-Bar Triceps Pushdown':                 'V-bar 绳索下压',
+  'Straight Bar Triceps Pushdown':          '直杆绳索下压',
+
+  // ── Legs / 腿部 ──
+  'Squat':                                  '深蹲',
+  'Deadlift':                               '硬拉',
+
+  // ── Abs / 腹部 ──
+  'Sit-Up':                                 '仰卧起坐',
+  'Ab Crunch Machine':                      '器械卷腹',
+
+  // ── Cardio / 有氧 ──
+  'Rowing Machine':                         '划船机',
+  'Elliptical Trainer':                     '椭圆机',
+  'Indoor Cycling':                         '室内自行车',
 };
 
 const bodyPartMap: Record<string, string> = {
@@ -34,7 +87,10 @@ const bodyPartMap: Record<string, string> = {
   'Back':       '背部',
   'Shoulders':  '肩部',
   'Arms':       '手臂',
+  'Biceps':     '二头',
+  'Triceps':    '三头',
   'Core':       '核心',
+  'Abs':        '腹部',
   'Cardio':     '有氧',
 };
 
