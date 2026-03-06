@@ -23,6 +23,7 @@ export default function ExercisePicker({ onSelect, onClose }: Props) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [customName, setCustomName] = useState('');
   const [customType, setCustomType] = useState<ActivityType>('Strength');
+  const [customBodyPart, setCustomBodyPart] = useState('Chest');
 
   useEffect(() => {
     getAllExercises().then(setExercises);
@@ -49,7 +50,7 @@ export default function ExercisePicker({ onSelect, onClose }: Props) {
     if (!customName.trim()) return;
     await addExercise({
       name: customName.trim(),
-      bodyPart: '',
+      bodyPart: customBodyPart,
       equipment: '',
       isCustom: true,
     });
@@ -147,6 +148,18 @@ export default function ExercisePicker({ onSelect, onClose }: Props) {
                 value={customName}
                 onChange={(e) => setCustomName(e.target.value)}
               />
+            </div>
+            <div className="input-group">
+              <label>{t('picker.bodyPart')}</label>
+              <select
+                className="input"
+                value={customBodyPart}
+                onChange={(e) => setCustomBodyPart(e.target.value)}
+              >
+                {CATEGORY_ORDER.map((cat) => (
+                  <option key={cat} value={cat}>{tBodyPart(cat, lang)}</option>
+                ))}
+              </select>
             </div>
             <div className="input-group">
               <label>{t('picker.type')}</label>

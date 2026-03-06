@@ -61,6 +61,7 @@ const translations = {
   'picker.cardio':          { en: '+ Cardio',                            zh: '+ 有氧' },
   'picker.skill':           { en: '+ Skill',                             zh: '+ 技能' },
   'picker.exerciseName':    { en: 'Exercise Name',                       zh: '动作名称' },
+  'picker.bodyPart':        { en: 'Category',                            zh: '分类' },
   'picker.type':            { en: 'Type',                                zh: '类型' },
   'picker.add':             { en: 'Add',                                 zh: '添加' },
   'picker.back':            { en: 'Back',                                zh: '返回' },
