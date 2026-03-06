@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import type { WorkoutTemplate, TemplateActivity, ActivityType } from '../types';
 import { getAllTemplates, saveTemplate, deleteTemplate } from '../db/operations';
-import { useT } from '../i18n';
+import { useI18n } from '../i18n';
+import { tExercise } from '../utils/exerciseNames';
 
 export default function TemplatesPage() {
-  const t = useT();
+  const { t, lang } = useI18n();
   const [templates, setTemplates] = useState<WorkoutTemplate[]>([]);
   const [editing, setEditing] = useState<WorkoutTemplate | null>(null);
 
@@ -88,7 +89,7 @@ export default function TemplatesPage() {
           <div style={{ marginTop: 8 }}>
             {tpl.activities.map((a, i) => (
               <div key={i} style={{ fontSize: 13, color: 'var(--text-muted)' }}>
-                {a.title || t('templates.unnamed')} · {t(`type.${a.type}` as any)}
+                {tExercise(a.title, lang) || t('templates.unnamed')} · {t(`type.${a.type}` as any)}
                 {a.sets ? ` · ${a.sets} ${t('today.sets')}` : ''}
               </div>
             ))}

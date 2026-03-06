@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { getAllExercises, getPersonalRecords, getWeeklyVolume } from '../db/operations';
 import type { ExerciseReference, PersonalRecord } from '../types';
-import { useT } from '../i18n';
+import { useI18n } from '../i18n';
+import { tExercise } from '../utils/exerciseNames';
 
 export default function ProgressPage() {
-  const t = useT();
+  const { t, lang } = useI18n();
   const [exercises, setExercises] = useState<ExerciseReference[]>([]);
   const [selected, setSelected] = useState<string>('');
   const [pr, setPr] = useState<PersonalRecord | null>(null);
@@ -41,7 +42,7 @@ export default function ProgressPage() {
         <select className="input" value={selected} onChange={(e) => setSelected(e.target.value)}>
           {exercises.map((ex) => (
             <option key={ex.id} value={ex.name}>
-              {ex.name}
+              {tExercise(ex.name, lang)}
             </option>
           ))}
         </select>

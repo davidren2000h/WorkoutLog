@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import type { ExerciseReference, ActivityType } from '../types';
 import { getAllExercises, addExercise } from '../db/operations';
-import { useT } from '../i18n';
+import { useI18n } from '../i18n';
+import { tExercise, tBodyPart, exerciseMatchesFilter } from '../utils/exerciseNames';
 
 interface Props {
   onSelect: (type: ActivityType, title: string) => void;
@@ -9,7 +10,7 @@ interface Props {
 }
 
 export default function ExercisePicker({ onSelect, onClose }: Props) {
-  const t = useT();
+  const { t, lang } = useI18n();
   const [exercises, setExercises] = useState<ExerciseReference[]>([]);
   const [filter, setFilter] = useState('');
   const [mode, setMode] = useState<'pick' | 'custom'>('pick');
@@ -21,7 +22,7 @@ export default function ExercisePicker({ onSelect, onClose }: Props) {
   }, []);
 
   const filtered = exercises.filter((e) =>
-    e.name.toLowerCase().includes(filter.toLowerCase()),
+    exerciseMatchesFilter(e.name, filter),
   );
 
   const handleCustom = async () => {
@@ -57,9 +58,9 @@ export default function ExercisePicker({ onSelect, onClose }: Props) {
                   style={{ justifyContent: 'flex-start', padding: '10px 8px' }}
                   onClick={() => onSelect('Strength', ex.name)}
                 >
-                  <span>{ex.name}</span>
+                  <span>{tExercise(ex.name, lang)}</span>
                   <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--text-muted)' }}>
-                    {ex.bodyPart}
+                    {tBodyPart(ex.bodyPart, lang)}
                   </span>
                 </button>
               ))}

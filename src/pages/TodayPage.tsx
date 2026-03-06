@@ -10,11 +10,12 @@ import {
   startFromTemplate,
 } from '../db/operations';
 import type { Session, WorkoutTemplate, SessionWithActivities } from '../types';
-import { useT } from '../i18n';
+import { useI18n } from '../i18n';
+import { tExercise } from '../utils/exerciseNames';
 
 export default function TodayPage() {
   const navigate = useNavigate();
-  const t = useT();
+  const { t, lang } = useI18n();
   const today = todayStr();
 
   const [sessions, setSessions] = useState<Session[]>([]);
@@ -84,7 +85,7 @@ export default function TodayPage() {
             </div>
             {full?.activities.map((a) => (
               <div key={a.id} style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 4 }}>
-                {a.title}{' '}
+                {tExercise(a.title, lang)}{' '}
                 {a.type === 'Strength' && a.strengthSets
                   ? `· ${a.strengthSets.filter((s) => s.isCompleted).length}/${a.strengthSets.length} ${t('today.sets')}`
                   : ''}
@@ -104,7 +105,7 @@ export default function TodayPage() {
           <div key={s.id} className="card" style={{ cursor: 'pointer' }}>
             <div className="flex-between" onClick={() => navigate(`/session/${s.id}`)}>
               <span className="card-title">
-                {full?.activities.map((a) => a.title).join(', ') || t('today.workout')}
+                {full?.activities.map((a) => tExercise(a.title, lang)).join(', ') || t('today.workout')}
               </span>
               <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>
                 {s.duration ? formatDuration(s.duration) : ''}

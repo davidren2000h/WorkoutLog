@@ -1,5 +1,6 @@
 import type { ShareStats } from '../db/operations';
 import type { Lang } from '../i18n';
+import { tExercise } from './exerciseNames';
 
 /**
  * iPhone screen-sized image generator for social media sharing.
@@ -229,7 +230,7 @@ export async function generateShareImage(
       ctx.fillStyle = TEXT_WHITE;
       ctx.font = '500 30px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
       ctx.textAlign = 'left';
-      ctx.fillText(ex.name, PAD + 52, ey + 27);
+      ctx.fillText(tExercise(ex.name, lang), PAD + 52, ey + 27);
 
       // Count
       ctx.fillStyle = TEXT_DIM;

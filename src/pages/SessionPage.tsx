@@ -19,12 +19,13 @@ import SetRow from '../components/SetRow';
 import CardioForm from '../components/CardioForm';
 import SkillForm from '../components/SkillForm';
 import ExercisePicker from '../components/ExercisePicker';
-import { useT } from '../i18n';
+import { useI18n } from '../i18n';
+import { tExercise } from '../utils/exerciseNames';
 
 export default function SessionPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const t = useT();
+  const { t, lang } = useI18n();
   const sessionId = parseInt(id!, 10);
 
   const [session, setSession] = useState<SessionWithActivities | null>(null);
@@ -123,7 +124,7 @@ export default function SessionPage() {
         <div key={act.id} className="card">
           <div className="card-header">
             <div>
-              <span className="card-title">{act.title}</span>
+              <span className="card-title">{tExercise(act.title, lang)}</span>
               <span className={`badge badge-${act.type.toLowerCase()}`} style={{ marginLeft: 8 }}>
                 {t(`type.${act.type}` as const)}
               </span>
