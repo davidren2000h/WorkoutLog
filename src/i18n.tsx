@@ -54,6 +54,7 @@ const translations = {
 
   /* ── Exercise Picker ── */
   'picker.title':           { en: 'Add Exercise',                        zh: '添加动作' },
+  'picker.category':        { en: 'Choose Category',                     zh: '选择分类' },
   'picker.search':          { en: 'Search exercises...',                  zh: '搜索动作...' },
   'picker.noMatch':         { en: 'No matches',                          zh: '没有匹配' },
   'picker.custom':          { en: '+ Custom exercise',                   zh: '+ 自定义动作' },
