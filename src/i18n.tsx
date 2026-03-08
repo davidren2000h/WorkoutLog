@@ -16,6 +16,11 @@ const translations = {
   /* ── Welcome Page ── */
   'welcome.title':        { en: 'Workout Log',                            zh: '健身日志' },
   'welcome.subtitle':     { en: 'Fast, offline-first workout journal.',   zh: '快速、离线优先的健身日记。' },
+  'welcome.chooseHow':    { en: 'How would you like to start?',           zh: '您想如何开始？' },
+  'welcome.createAccount':{ en: 'Create a Local Account',                 zh: '创建本地账户' },
+  'welcome.createDesc':   { en: 'No password needed. All data stored locally.', zh: '无需密码。所有数据保存在本地。' },
+  'welcome.guest':        { en: 'Continue as Guest',                      zh: '以访客身份继续' },
+  'welcome.guestDesc':    { en: 'Start right away. You can create an account later in Settings.', zh: '立即开始。稍后可在设置中创建账户。' },
   'welcome.cta':          { en: 'Create your account to get started.',     zh: '创建账户，开始记录。' },
   'welcome.nameLabel':    { en: 'Your Name',                              zh: '你的名字' },
   'welcome.namePlaceholder': { en: 'e.g., Alex',                          zh: '例如：小明' },
@@ -144,6 +149,9 @@ const translations = {
   /* ── Settings Page ── */
   'settings.title':         { en: 'Settings',                            zh: '设置' },
   'settings.profile':       { en: 'Profile',                             zh: '个人资料' },
+  'settings.guestMode':     { en: 'Guest Mode',                           zh: '访客模式' },
+  'settings.guestDesc':     { en: 'You are using the app as a guest.',    zh: '您正在以访客身份使用。' },
+  'settings.createNow':     { en: 'Create Account',                       zh: '创建账户' },
   'settings.edit':          { en: 'Edit',                                zh: '编辑' },
   'settings.save':          { en: 'Save',                                zh: '保存' },
   'settings.cancel':        { en: 'Cancel',                              zh: '取消' },

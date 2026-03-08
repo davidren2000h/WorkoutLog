@@ -13,8 +13,12 @@ import WelcomePage from './pages/WelcomePage';
 import { getProfile } from './db/operations';
 import type { UserProfile } from './types';
 
+const GUEST_KEY = 'workoutlog-guest';
+
 export default function App() {
+  // undefined = loading, null = no profile & not guest, UserProfile = logged in
   const [profile, setProfile] = useState<UserProfile | null | undefined>(undefined);
+  const [isGuest, setIsGuest] = useState<boolean | undefined>(undefined);
 
   const checkProfile = async () => {
     const p = await getProfile();
@@ -23,16 +27,22 @@ export default function App() {
 
   useEffect(() => {
     checkProfile();
+    setIsGuest(localStorage.getItem(GUEST_KEY) === '1');
   }, []);
 
-  // Loading state
-  if (profile === undefined) {
+  const handleGuest = () => {
+    localStorage.setItem(GUEST_KEY, '1');
+    setIsGuest(true);
+  };
+
+  // Still loading
+  if (profile === undefined || isGuest === undefined) {
     return null;
   }
 
-  // No account yet → welcome screen
-  if (profile === null) {
-    return <WelcomePage onCreated={checkProfile} />;
+  // No account and not guest → welcome screen
+  if (profile === null && !isGuest) {
+    return <WelcomePage onCreated={checkProfile} onGuest={handleGuest} />;
   }
 
   return (

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { deleteAllData, updateProfile } from '../db/operations';
+import { deleteAllData, updateProfile, createProfile } from '../db/operations';
 import { seedExercisesIfEmpty } from '../db/database';
 import type { UserProfile } from '../types';
 import { useI18n } from '../i18n';
 
 interface Props {
-  profile: UserProfile;
+  profile: UserProfile | null;
   onProfileUpdate: () => void;
 }
 
@@ -14,9 +14,12 @@ export default function SettingsPage({ profile, onProfileUpdate }: Props) {
   const navigate = useNavigate();
   const { t, lang, setLang } = useI18n();
   const [editingName, setEditingName] = useState(false);
-  const [nameInput, setNameInput] = useState(profile.name);
+  const [nameInput, setNameInput] = useState(profile?.name ?? '');
+  const [creatingAccount, setCreatingAccount] = useState(false);
+  const [newName, setNewName] = useState('');
 
   const handleSaveName = async () => {
+    if (!profile) return;
     const trimmed = nameInput.trim();
     if (!trimmed || trimmed === profile.name) {
       setEditingName(false);
@@ -25,6 +28,14 @@ export default function SettingsPage({ profile, onProfileUpdate }: Props) {
     await updateProfile(profile.id!, { name: trimmed });
     onProfileUpdate();
     setEditingName(false);
+  };
+
+  const handleCreateFromGuest = async () => {
+    const trimmed = newName.trim();
+    if (!trimmed) return;
+    await createProfile(trimmed);
+    onProfileUpdate();
+    setCreatingAccount(false);
   };
 
   const handleDeleteAll = async () => {
@@ -42,38 +53,72 @@ export default function SettingsPage({ profile, onProfileUpdate }: Props) {
 
       {/* Profile card */}
       <div className="card">
-        <div className="flex-between">
-          <span className="card-title">{t('settings.profile')}</span>
-          {!editingName && (
-            <button className="btn btn-ghost btn-sm" onClick={() => setEditingName(true)}>
-              {t('settings.edit')}
-            </button>
-          )}
-        </div>
-        {editingName ? (
-          <div className="flex-gap mt-8">
-            <input
-              className="input"
-              autoFocus
-              value={nameInput}
-              onChange={(e) => setNameInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSaveName()}
-              maxLength={50}
-            />
-            <button className="btn btn-primary btn-sm" onClick={handleSaveName}>
-              {t('settings.save')}
-            </button>
-            <button className="btn btn-ghost btn-sm" onClick={() => { setEditingName(false); setNameInput(profile.name); }}>
-              {t('settings.cancel')}
-            </button>
-          </div>
+        {profile ? (
+          <>
+            <div className="flex-between">
+              <span className="card-title">{t('settings.profile')}</span>
+              {!editingName && (
+                <button className="btn btn-ghost btn-sm" onClick={() => setEditingName(true)}>
+                  {t('settings.edit')}
+                </button>
+              )}
+            </div>
+            {editingName ? (
+              <div className="flex-gap mt-8">
+                <input
+                  className="input"
+                  autoFocus
+                  value={nameInput}
+                  onChange={(e) => setNameInput(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSaveName()}
+                  maxLength={50}
+                />
+                <button className="btn btn-primary btn-sm" onClick={handleSaveName}>
+                  {t('settings.save')}
+                </button>
+                <button className="btn btn-ghost btn-sm" onClick={() => { setEditingName(false); setNameInput(profile.name); }}>
+                  {t('settings.cancel')}
+                </button>
+              </div>
+            ) : (
+              <div style={{ marginTop: 8 }}>
+                <span style={{ fontSize: 18, fontWeight: 600 }}>{profile.name}</span>
+                <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4 }}>
+                  {t('settings.memberSince')} {new Date(profile.createdAt).toLocaleDateString()}
+                </p>
+              </div>
+            )}
+          </>
         ) : (
-          <div style={{ marginTop: 8 }}>
-            <span style={{ fontSize: 18, fontWeight: 600 }}>{profile.name}</span>
-            <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4 }}>
-              {t('settings.memberSince')} {new Date(profile.createdAt).toLocaleDateString()}
+          <>
+            <span className="card-title">{t('settings.guestMode')}</span>
+            <p style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 4 }}>
+              {t('settings.guestDesc')}
             </p>
-          </div>
+            {creatingAccount ? (
+              <div className="flex-gap mt-8">
+                <input
+                  className="input"
+                  autoFocus
+                  placeholder={t('welcome.namePlaceholder')}
+                  value={newName}
+                  onChange={(e) => setNewName(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleCreateFromGuest()}
+                  maxLength={50}
+                />
+                <button className="btn btn-primary btn-sm" onClick={handleCreateFromGuest} disabled={!newName.trim()}>
+                  {t('settings.save')}
+                </button>
+                <button className="btn btn-ghost btn-sm" onClick={() => setCreatingAccount(false)}>
+                  {t('settings.cancel')}
+                </button>
+              </div>
+            ) : (
+              <button className="btn btn-primary btn-sm" style={{ marginTop: 8 }} onClick={() => setCreatingAccount(true)}>
+                {t('settings.createNow')}
+              </button>
+            )}
+          </>
         )}
       </div>
 

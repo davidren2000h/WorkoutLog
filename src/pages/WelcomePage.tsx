@@ -5,14 +5,16 @@ import { useT } from '../i18n';
 
 interface Props {
   onCreated: () => void;
+  onGuest: () => void;
 }
 
-export default function WelcomePage({ onCreated }: Props) {
+export default function WelcomePage({ onCreated, onGuest }: Props) {
   const t = useT();
+  const [step, setStep] = useState<'choose' | 'create'>('choose');
   const [name, setName] = useState('');
   const [saving, setSaving] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = name.trim();
     if (!trimmed) return;
@@ -22,20 +24,25 @@ export default function WelcomePage({ onCreated }: Props) {
     onCreated();
   };
 
-  return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
-        padding: 24,
-        maxWidth: 400,
-        margin: '0 auto',
-      }}
-    >
-      {/* Logo */}
+  const handleGuest = async () => {
+    setSaving(true);
+    await seedExercisesIfEmpty();
+    onGuest();
+  };
+
+  const containerStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '100vh',
+    padding: 24,
+    maxWidth: 400,
+    margin: '0 auto',
+  };
+
+  const logoBlock = (
+    <>
       <div
         style={{
           width: 80,
@@ -51,25 +58,59 @@ export default function WelcomePage({ onCreated }: Props) {
       >
         <span style={{ fontSize: 36, fontWeight: 700, color: 'var(--primary)' }}>W</span>
       </div>
-
       <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 8, textAlign: 'center' }}>
         {t('welcome.title')}
       </h1>
-      <p
-        style={{
-          color: 'var(--text-muted)',
-          fontSize: 14,
-          textAlign: 'center',
-          marginBottom: 32,
-          lineHeight: 1.5,
-        }}
-      >
+      <p style={{ color: 'var(--text-muted)', fontSize: 14, textAlign: 'center', marginBottom: 32, lineHeight: 1.5 }}>
         {t('welcome.subtitle')}
-        <br />
+      </p>
+    </>
+  );
+
+  /* ── Step 1: Choose path ── */
+  if (step === 'choose') {
+    return (
+      <div style={containerStyle}>
+        {logoBlock}
+        <p style={{ fontSize: 15, marginBottom: 24, textAlign: 'center' }}>
+          {t('welcome.chooseHow')}
+        </p>
+
+        <button
+          className="btn btn-primary btn-block"
+          style={{ padding: 14, marginBottom: 8 }}
+          onClick={() => setStep('create')}
+        >
+          {t('welcome.createAccount')}
+        </button>
+        <p style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 24 }}>
+          {t('welcome.createDesc')}
+        </p>
+
+        <button
+          className="btn btn-ghost btn-block"
+          style={{ padding: 14 }}
+          onClick={handleGuest}
+          disabled={saving}
+        >
+          {t('welcome.guest')}
+        </button>
+        <p style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center', marginTop: 8 }}>
+          {t('welcome.guestDesc')}
+        </p>
+      </div>
+    );
+  }
+
+  /* ── Step 2: Account creation form ── */
+  return (
+    <div style={containerStyle}>
+      {logoBlock}
+      <p style={{ color: 'var(--text-muted)', fontSize: 14, textAlign: 'center', marginBottom: 24 }}>
         {t('welcome.cta')}
       </p>
 
-      <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+      <form onSubmit={handleCreate} style={{ width: '100%' }}>
         <div className="input-group">
           <label>{t('welcome.nameLabel')}</label>
           <input
@@ -93,14 +134,7 @@ export default function WelcomePage({ onCreated }: Props) {
         </button>
       </form>
 
-      <p
-        style={{
-          marginTop: 40,
-          fontSize: 11,
-          color: 'var(--text-muted)',
-          textAlign: 'center',
-        }}
-      >
+      <p style={{ marginTop: 40, fontSize: 11, color: 'var(--text-muted)', textAlign: 'center' }}>
         {t('welcome.privacy')}
       </p>
     </div>
