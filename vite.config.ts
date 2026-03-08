@@ -13,6 +13,7 @@ export default defineConfig({
         name: 'Workout Log',
         short_name: 'WorkoutLog',
         description: 'Fast, offline-first workout journal',
+        categories: ['fitness', 'health', 'lifestyle'],
         theme_color: '#1a1a2e',
         background_color: '#1a1a2e',
         display: 'standalone',
