@@ -16,11 +16,16 @@ export default defineConfig({
         theme_color: '#1a1a2e',
         background_color: '#1a1a2e',
         display: 'standalone',
+        orientation: 'portrait',
         start_url: '/WorkoutLog/',
         icons: [
           { src: 'pwa-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'pwa-512.png', sizes: '512x512', type: 'image/png' },
           { src: 'pwa-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }
+        ],
+        screenshots: [
+          { src: 'screenshot-narrow.png', sizes: '1290x2796', type: 'image/png', form_factor: 'narrow' },
+          { src: 'screenshot-wide.png', sizes: '2048x1536', type: 'image/png', form_factor: 'wide' }
         ]
       },
       workbox: {
