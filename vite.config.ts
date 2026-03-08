@@ -18,7 +18,9 @@ export default defineConfig({
         background_color: '#1a1a2e',
         display: 'standalone',
         orientation: 'portrait',
+        scope: '/WorkoutLog/',
         start_url: '/WorkoutLog/',
+        id: '/WorkoutLog/',
         icons: [
           { src: 'pwa-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'pwa-512.png', sizes: '512x512', type: 'image/png' },
@@ -31,7 +33,25 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
-        runtimeCaching: []
+        navigateFallback: 'index.html',
+        navigateFallbackDenylist: [/^\/WorkoutLog\/api/],
+        runtimeCaching: [
+          {
+            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'images',
+              expiration: { maxEntries: 60, maxAgeSeconds: 30 * 24 * 60 * 60 }
+            }
+          },
+          {
+            urlPattern: /\.(?:js|css)$/,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'static-resources'
+            }
+          }
+        ]
       }
     })
   ]
