@@ -11,9 +11,9 @@ export default defineConfig({
       injectRegister: 'inline',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'Workout Log',
-        short_name: 'WorkoutLog',
-        description: 'Fast, offline-first workout journal',
+        name: 'Pure Workout Log',
+        short_name: 'PureWorkout',
+        description: 'Offline Workout Log | No Ads | No IAP',
         categories: ['fitness', 'health', 'lifestyle'],
         theme_color: '#1a1a2e',
         background_color: '#1a1a2e',

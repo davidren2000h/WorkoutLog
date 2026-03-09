@@ -14,8 +14,8 @@ const translations = {
   'nav.more':        { en: 'More',         zh: '更多' },
 
   /* ── Welcome Page ── */
-  'welcome.title':        { en: 'Workout Log',                            zh: '健身日志' },
-  'welcome.subtitle':     { en: 'Fast, offline-first workout journal.',   zh: '快速、离线优先的健身日记。' },
+  'welcome.title':        { en: 'Pure Workout Log',                       zh: '纯净健身日志' },
+  'welcome.subtitle':     { en: 'Offline Workout Log | No Ads | No IAP',  zh: '离线健身日志 | 无广告 | 无内购' },
   'welcome.chooseHow':    { en: 'How would you like to start?',           zh: '您想如何开始？' },
   'welcome.createAccount':{ en: 'Create a Local Account',                 zh: '创建本地账户' },
   'welcome.createDesc':   { en: 'No password needed. All data stored locally.', zh: '无需密码。所有数据保存在本地。' },
@@ -169,7 +169,7 @@ const translations = {
   'settings.confirmDelete1': { en: 'This will permanently delete ALL your workout data. Are you sure?', zh: '这将永久删除所有训练数据，确定吗？' },
   'settings.confirmDelete2': { en: 'This cannot be undone. Continue?',   zh: '此操作不可撤销，继续吗？' },
   'settings.deleteSuccess': { en: 'All data deleted.',                   zh: '所有数据已删除。' },
-  'settings.version':       { en: 'Workout Log v1.0.0',                  zh: '健身日志 v1.0.0' },
+  'settings.version':       { en: 'Pure Workout Log v1.0.0',             zh: '纯净健身日志 v1.0.0' },
   'settings.offline':       { en: 'Offline-first PWA · Your data stays on your device', zh: '离线优先 PWA · 数据保存在你的设备上' },
 
   /* ── Share Page ── */
@@ -189,7 +189,7 @@ const translations = {
   'share.totalVolume':      { en: 'Total Volume',                         zh: '总训练量' },
   'share.exercises':        { en: 'Exercises',                            zh: '动作数' },
   'share.topExercises':     { en: 'Top Exercises',                        zh: '最常做的动作' },
-  'share.watermark':        { en: 'Workout Log',                          zh: '健身日志' },
+  'share.watermark':        { en: 'Pure Workout Log',                     zh: '纯净健身日志' },
   'share.dateRange':        { en: 'Date Range',                           zh: '日期范围' },
   'share.sets':             { en: 'sets',                                 zh: '组' },
   'share.activeDays':       { en: 'Active Days',                          zh: '运动天数' },

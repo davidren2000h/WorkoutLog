@@ -17,9 +17,9 @@ function makeSvg(w, h, title, subtitle) {
 const outDir = path.join(__dirname, '..', 'public');
 
 Promise.all([
-  sharp(makeSvg(1290, 2796, 'Workout Log', 'Track your training'))
+  sharp(makeSvg(1290, 2796, 'Pure Workout Log', 'No Ads | No IAP'))
     .png().toFile(path.join(outDir, 'screenshot-narrow.png')),
-  sharp(makeSvg(2048, 1536, 'Workout Log', 'Track your training'))
+  sharp(makeSvg(2048, 1536, 'Pure Workout Log', 'No Ads | No IAP'))
     .png().toFile(path.join(outDir, 'screenshot-wide.png')),
 ]).then(() => {
   console.log('Screenshots generated: public/screenshot-narrow.png, public/screenshot-wide.png');
