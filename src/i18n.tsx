@@ -27,6 +27,8 @@ const translations = {
   'welcome.submit':       { en: 'Get Started',                            zh: '开始使用' },
   'welcome.creating':     { en: 'Creating...',                            zh: '创建中...' },
   'welcome.privacy':      { en: 'No password needed. Your data stays on this device.', zh: '无需密码。数据保存在本设备上。' },
+  'welcome.aboutTitle':   { en: 'About This App', zh: '关于此应用' },
+  'welcome.aboutBody':    { en: 'This is a simple workout logging app. There are no ads, no in-app purchases, and no user accounts required. All data is stored locally on your device and the app works completely offline.', zh: '这是一款简单的健身记录应用。没有广告、没有内购、无需账户。所有数据存储在您的设备本地，应用完全离线运行。' },
 
   /* ── Today Page ── */
   'today.title':           { en: 'Today',                                 zh: '今天' },

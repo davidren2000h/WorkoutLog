@@ -98,6 +98,23 @@ export default function WelcomePage({ onCreated, onGuest }: Props) {
         <p style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center', marginTop: 8 }}>
           {t('welcome.guestDesc')}
         </p>
+
+        {/* Disclaimer */}
+        <div style={{
+          marginTop: 32,
+          padding: 16,
+          borderRadius: 12,
+          background: 'var(--surface)',
+          border: '1px solid var(--border)',
+          width: '100%',
+        }}>
+          <p style={{ fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
+            {t('welcome.aboutTitle')}
+          </p>
+          <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6 }}>
+            {t('welcome.aboutBody')}
+          </p>
+        </div>
       </div>
     );
   }
