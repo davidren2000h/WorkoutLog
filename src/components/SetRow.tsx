@@ -34,15 +34,6 @@ export default function SetRow({ set, index, onChange, onDelete }: Props) {
         value={set.reps || ''}
         onChange={(e) => handleNum('reps', e.target.value)}
       />
-      <input
-        className="input input-sm"
-        type="number"
-        inputMode="decimal"
-        placeholder="RPE"
-        style={{ width: 50 }}
-        value={set.rpe ?? ''}
-        onChange={(e) => handleNum('rpe', e.target.value)}
-      />
       <button
         className={`set-check ${set.isCompleted ? 'completed' : ''}`}
         onClick={() => onChange(set.id!, { isCompleted: !set.isCompleted })}

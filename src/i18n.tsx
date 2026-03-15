@@ -52,7 +52,11 @@ const translations = {
   'session.min':            { en: 'min',                                 zh: '分钟' },
   'session.weight':         { en: 'Weight',                              zh: '重量' },
   'session.reps':           { en: 'Reps',                                zh: '次数' },
-  'session.rpe':            { en: 'RPE',                                 zh: 'RPE' },
+  'session.rpe':            { en: 'RPE',                                 zh: '强度' },
+  'session.effort':          { en: 'Effort',                              zh: '强度' },
+  'session.effortEasy':      { en: 'Easy',                                zh: '轻松' },
+  'session.effortMedium':    { en: 'Medium',                              zh: '中等' },
+  'session.effortHard':      { en: 'Hard',                                zh: '困难' },
   'session.addSet':         { en: '+ Add Set',                           zh: '+ 添加组' },
   'session.addExercise':    { en: '+ Add Exercise',                      zh: '+ 添加动作' },
   'session.notes':          { en: 'Session Notes',                       zh: '训练备注' },
@@ -199,6 +203,15 @@ const translations = {
   /* ── Settings: share ── */
   'settings.share':         { en: 'Share Training',                       zh: '分享训练' },
   'settings.shareDesc':     { en: 'Generate a picture for social media sharing', zh: '生成训练记录图片分享到社交媒体' },
+
+  /* ── Rest Timer ── */
+  'rest.title':             { en: 'Rest',                                zh: '休息' },
+  'rest.start':             { en: 'Start',                               zh: '开始' },
+  'rest.pause':             { en: 'Pause',                               zh: '暂停' },
+  'rest.resume':            { en: 'Resume',                              zh: '继续' },
+  'rest.skip':              { en: 'Skip',                                zh: '跳过' },
+  'rest.done':              { en: 'Done!',                               zh: '结束！' },
+  'rest.editDefault':       { en: 'Edit default rest time',              zh: '编辑默认休息时间' },
 
   /* ── Activity types ── */
   'type.Strength':          { en: 'Strength',                            zh: '力量' },

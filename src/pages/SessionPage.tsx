@@ -15,6 +15,7 @@ import {
   getLastUsedDefaults,
 } from '../db/operations';
 import Timer from '../components/Timer';
+import RestTimer from '../components/RestTimer';
 import SetRow from '../components/SetRow';
 import CardioForm from '../components/CardioForm';
 import SkillForm from '../components/SkillForm';
@@ -30,6 +31,7 @@ export default function SessionPage() {
 
   const [session, setSession] = useState<SessionWithActivities | null>(null);
   const [showPicker, setShowPicker] = useState(false);
+  const [restTrigger, setRestTrigger] = useState(0);
 
   const reload = useCallback(async () => {
     const s = await getSessionFull(sessionId);
@@ -69,17 +71,29 @@ export default function SessionPage() {
     // Duplicate last set values
     const act = session.activities.find((a) => a.id === actId);
     const lastSet = act?.strengthSets?.at(-1);
-    await addSet(actId, lastSet ? { weight: lastSet.weight, reps: lastSet.reps, rpe: lastSet.rpe } : undefined);
+    await addSet(actId, lastSet ? { weight: lastSet.weight, reps: lastSet.reps } : undefined);
     await reload();
   };
 
   const handleSetChange = async (setId: number, changes: Partial<StrengthSet>) => {
     await updateSet(setId, changes);
+    if (changes.isCompleted === true) {
+      setRestTrigger((prev) => prev + 1);
+    }
     await reload();
   };
 
   const handleDeleteSet = async (setId: number) => {
     await deleteSet(setId);
+    await reload();
+  };
+
+  const handleEffortChange = async (actId: number, level: number) => {
+    const act = session.activities.find((a) => a.id === actId);
+    if (!act?.strengthSets) return;
+    for (const s of act.strengthSets) {
+      await updateSet(s.id!, { rpe: level });
+    }
     await reload();
   };
 
@@ -145,7 +159,6 @@ export default function SessionPage() {
                 <span className="set-index">#</span>
                 <span style={{ width: 70, textAlign: 'center' }}>{t('session.weight')}</span>
                 <span style={{ width: 70, textAlign: 'center' }}>{t('session.reps')}</span>
-                <span style={{ width: 50, textAlign: 'center' }}>{t('session.rpe')}</span>
                 <span style={{ width: 28 }}></span>
                 <span style={{ width: 28 }}></span>
               </div>
@@ -158,6 +171,23 @@ export default function SessionPage() {
                   onDelete={handleDeleteSet}
                 />
               ))}
+              {/* Effort level selector */}
+              <div className="effort-selector mt-8">
+                <span className="effort-label">{t('session.effort')}</span>
+                {([1, 2, 3] as const).map((level) => {
+                  const effortKey = level === 1 ? 'session.effortEasy' : level === 2 ? 'session.effortMedium' : 'session.effortHard';
+                  const currentRpe = act.strengthSets?.[0]?.rpe;
+                  return (
+                    <button
+                      key={level}
+                      className={`effort-btn effort-btn-${level} ${currentRpe === level ? 'effort-active' : ''}`}
+                      onClick={() => handleEffortChange(act.id!, level)}
+                    >
+                      {t(effortKey as any)}
+                    </button>
+                  );
+                })}
+              </div>
               {isActive && (
                 <button className="btn btn-ghost btn-sm mt-8" onClick={() => handleAddSet(act.id!)}>
                   {t('session.addSet')}
@@ -196,6 +226,9 @@ export default function SessionPage() {
           />
         </div>
       </div>
+
+      {/* Rest Timer */}
+      {isActive && <RestTimer trigger={restTrigger} visible={true} />}
 
       {showPicker && (
         <ExercisePicker onSelect={handleAddExercise} onClose={() => setShowPicker(false)} />
