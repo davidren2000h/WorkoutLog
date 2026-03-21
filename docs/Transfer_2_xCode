@@ -1,0 +1,53 @@
+Please analyze this project and provide a structured overview of its architecture.
+
+1. Data Model
+- What fields are stored for each workout entry?
+- Provide a concrete JSON example of the data structure.
+- Are there multiple entity types (e.g. Workout, Exercise, Set) or just one?
+- How are relationships represented, if any?
+
+2. Data Persistence
+- How is data stored (localStorage, IndexedDB, backend API, etc.)?
+- Where is the storage logic implemented?
+- Is the app fully offline-capable?
+- Is there any data migration or versioning logic?
+
+3. UI Structure
+- What are the main screens/pages of the app?
+- What does each page do?
+- How does navigation work between pages?
+- Is this a single-page app (SPA) or multi-page?
+
+4. Core Logic (CRUD)
+- How is a new workout created?
+- How are workouts edited and deleted?
+- Where is the main state managed?
+- Are there derived calculations (e.g. totals, statistics)?
+
+5. State Management
+- How is state managed in this project?
+- Is there a global state?
+- Is a framework used (React, Vue, etc.) or is it vanilla JavaScript?
+- How does the UI update when data changes?
+
+6. Analytics / Statistics
+- Are there any charts or summaries?
+- How are they calculated?
+- Where is this logic implemented?
+
+7. Tech Stack
+- What frameworks or libraries are used?
+- What build tools are used?
+
+8. Key Files
+- List the most important files in the project and explain what each one does.
+- Focus on entry point, data logic, UI components, and storage logic.
+
+9. iOS Migration (High-Level)
+If this app were to be rewritten as a native iOS app using SwiftUI, describe:
+- How the data model should be structured
+- What storage approach should be used
+- What screens should exist
+- How navigation should be designed
+
+Do NOT provide code. Focus on architecture and structure.
